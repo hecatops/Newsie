@@ -5,6 +5,8 @@ import yake
 from datetime import datetime
 import time
 
+st.set_page_config(page_title="Newsie", page_icon="📰", layout="wide")
+
 NEWS_API_KEY = st.secrets["auth_token"]
 NEWS_API_ENDPOINT = "https://newsapi.org/v2/top-headlines"
 COUNTRY = "us" 
@@ -45,7 +47,7 @@ def extract_keywords(text):
     keywords = kw_extractor.extract_keywords(text)
     return [kw[0] for kw in keywords] 
 
-st.title("Real-Time News Sentiment Analysis")
+st.title("Newsie Time")
 
 sentiment_filter = st.selectbox(
     "Filter headlines by sentiment",
