@@ -6,8 +6,8 @@ from datetime import datetime
 import time
 
 headers = {
-    'Authorization": st.secrets["auth_token"],
-    'Content-Type': 'application/json'
+    'authorization": st.secrets["auth_token"],
+    'content-Type': 'application/json'
 }
 
 NEWS_API_ENDPOINT = "https://newsapi.org/v2/top-headlines"
