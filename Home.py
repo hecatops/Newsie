@@ -5,11 +5,7 @@ import yake
 from datetime import datetime
 import time
 
-headers = {
-    'authorization": st.secrets["auth_token"],
-    'content-Type': 'application/json'
-}
-
+NEWS_API_KEY = st.secrets["auth_token"]
 NEWS_API_ENDPOINT = "https://newsapi.org/v2/top-headlines"
 COUNTRY = "us" 
 
