@@ -51,3 +51,6 @@ urllib3==2.3.0
 vaderSentiment==3.3.2
 watchdog==6.0.0
 yake==0.4.8
+matplotlib==3.8.2
+wordcloud==1.9.3
+transformers==4.38.2
