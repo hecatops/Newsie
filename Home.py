@@ -32,7 +32,7 @@ def get_news():
 def analyze_sentiment(text):
     """Analyze sentiment using VADER and DistilBERT"""
     vader_scores = analyzer.polarity_scores(text)
-    bert_result = distilbert_analyzer(text[:512])[0]  # BERT model has a token limit
+    bert_result = distilbert_analyzer(text[:512])[0]
     
     compound_score = vader_scores['compound']
     if compound_score >= 0.05:
@@ -54,7 +54,6 @@ def extract_keywords(text):
 
 st.title("Newsie Time")
 
-# User options
 sentiment_filter = st.selectbox("Filter headlines by sentiment", ["All", "Positive", "Negative", "Neutral"])
 sentiment_threshold = st.slider("Confidence threshold (BERT)", 0.5, 1.0, 0.7, 0.05)
 topic_filter = st.text_input("Filter by keyword (optional)")
@@ -83,7 +82,7 @@ if should_refresh:
                 vader_sentiment, vader_score, bert_sentiment, confidence = analyze_sentiment(text_to_analyze)
                 
                 if confidence < sentiment_threshold:
-                    continue  # Skip articles with low confidence
+                    continue
                 
                 processed_article = {
                     **article,
@@ -108,13 +107,11 @@ if should_refresh:
             
             st.write(f"Showing {len(processed_articles)} headlines matching criteria")
             
-            # Generate word cloud
             all_keywords = [kw for article in processed_articles for kw in article["keywords"]]
             if all_keywords:
                 wordcloud = WordCloud(width=600, height=300, background_color='white').generate(" ".join(all_keywords))
                 st.image(wordcloud.to_array(), use_column_width=True)
             
-            # Sentiment distribution visualization
             sentiment_counts = {"Positive": 0, "Negative": 0, "Neutral": 0}
             for article in processed_articles:
                 sentiment_counts[article["vader_sentiment"]] += 1
@@ -122,8 +119,7 @@ if should_refresh:
             fig, ax = plt.subplots()
             ax.bar(sentiment_counts.keys(), sentiment_counts.values(), color=['green', 'red', 'gray'])
             st.pyplot(fig)
-            
-            # Display articles
+
             for article in processed_articles:
                 with st.container():
                     st.markdown("---")
